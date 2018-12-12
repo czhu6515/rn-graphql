@@ -9,5 +9,11 @@ module Types
     def test_field
       "Hello World!"
     end
+
+    field :me, Types::UserType null: false,
+      description: "The current user"
+    def me
+      User.first
+    end
   end
 end
