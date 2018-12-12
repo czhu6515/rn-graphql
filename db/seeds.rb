@@ -7,19 +7,22 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-GROUP_NAME = 10.times.map { Faker::Internet.company }
-
-puts GROUP_NAME
+GROUP_NAME = 10.times.map { Faker::Company.name }
 
 SPLIT = 0.4
 OFFSET = GROUP_NAME.length * SPLIT
 
-COMPANY_USERS = {
-  'guy@company.com' => GROUP_NAME[0, OFFSET],
-  'guy2@company.com' => GROUP_NAME[OFFSET..-1]
+GROUP_USERS = {
+  'inv@group.com' => GROUP_NAME[0, OFFSET],
+  'inv2@group.com' => GROUP_NAME[OFFSET..-1]
 }
 
-COMPANY_USERS.each do |email, company|
+GROUP_USERS.each do |email, group|
   user = User.new(email: email, password: '123123')
-  company.each { |}
+  user.save
+  group.each { |name| user.groups.create(name: name) }
 end
+
+p "User count: #{User.count}"
+p "Group count:' #{Group.count}"
+p "Groups per User #{Group.group(:user_id).count}"
