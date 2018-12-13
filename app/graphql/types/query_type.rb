@@ -10,10 +10,16 @@ module Types
       "Hello World!"
     end
 
-    field :me, Types::UserType null: false,
+    field :me, Types::UserType, null: false,
       description: "The current user"
     def me
       User.first
+    end
+
+    field :projects, types[Types::ProjectType], null: false.
+      description: 'projects for the surrent user'
+    def projects
+      Project.all
     end
   end
 end
