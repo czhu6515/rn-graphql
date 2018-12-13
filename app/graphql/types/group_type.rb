@@ -6,5 +6,8 @@ module Types
     field :id, !types.Int
     field :name, !types.String
     field :userId, !types.Int, property: :user_id
+
+    field :user, !UserType
   end
+
 end
