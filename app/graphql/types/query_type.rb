@@ -16,10 +16,10 @@ module Types
       User.first
     end
 
-    field :projects, types[Types::ProjectType], null: false.
-      description: 'projects for the surrent user'
-    def projects
-      Project.all
+    field :groups, [Types::GroupType], null: false,
+      description: 'groups that the user belongs to'
+    def groups
+      Group.all
     end
   end
 end
